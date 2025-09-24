@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формулы для 1-11 классов</title>
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-tertiary: #0f3460;
+            --text-primary: #e6e6e6;
+            --text-secondary: #b3b3b3;
+            --accent: #e94560;
+            --accent-hover: #ff6b81;
+            --border: #2d4059;
+            --success: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: var(--bg-tertiary);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .tab.active {
+            background-color: var(--accent);
+        }
+        
+        .tab:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .search-container {
+            display: flex;
+            margin-bottom: 30px;
+            gap: 15px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0 0 5px 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        
+        .suggestion-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .suggestion-item:hover {
+            background-color: var(--accent);
+        }
+        
+        .filter-select {
+            padding: 12px 15px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            min-width: 150px;
+        }
+        
+        .content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            flex: 0 0 300px;
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .subject-list {
+            list-style-type: none;
+        }
+        
+        .subject-item {
+            margin-bottom: 10px;
+        }
+        
+        .subject-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--bg-tertiary);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .subject-title:hover {
+            background-color: var(--accent);
+        }
+        
+        .class-list {
+            list-style-type: none;
+            margin-left: 20px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .class-item {
+            margin-bottom: 5px;
+        }
+        
+        .class-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .class-title:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .topic-list {
+            list-style-type: none;
+            margin-left: 20px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .topic-item {
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 3px;
+        }
+        
+        .topic-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .main-content {
+            flex: 1;
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 70vh;
+        }
+        
+        .formula-container {
+            margin-bottom: 30px;
+        }
+        
+        .formula-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .formula-display {
+            background-color: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .formula-explanation {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .step-by-step {
+            background-color: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .step {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+        
+        .calculator {
+            background-color: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .input-field {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 10px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            color: var(--text-primary);
+        }
+        
+        .calculate-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        
+        .calculate-btn:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        .show-steps-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .show-steps-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: var(--bg-primary);
+            border-radius: 3px;
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .rotated {
+            transform: rotate(90deg);
+        }
+        
+        /* Инженерный калькулятор */
+        .calculator-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .calc-btn {
+            padding: 15px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        
+        .calc-btn:hover {
+            background-color: var(--accent);
+        }
+        
+        .calc-display {
+            grid-column: span 6;
+            padding: 15px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1.5rem;
+            text-align: right;
+            margin-bottom: 10px;
+            min-height: 60px;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .calc-clear {
+            background-color: var(--accent);
+        }
+        
+        .calc-equals {
+            background-color: var(--success);
+        }
+        
+        .calc-func {
+            background-color: #2d4059;
+        }
+        
+        /* Блокнот */
+        .notebook-container {
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+        
+        .notebook-tools {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .tool-btn {
+            padding: 8px 15px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        
+        .tool-btn.active {
+            background-color: var(--accent);
+        }
+        
+        .color-picker {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        .notebook-canvas-container {
+            flex: 1;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        #notebookCanvas {
+            background-color: white;
+            cursor: crosshair;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .notebook-textarea {
+            flex: 1;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            color: black;
+            display: none;
+            width: 100%;
+            height: 100%;
+            resize: none;
+        }
+        
+        .recommendations {
+            background-color: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .recommendation-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .recommendation-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 1;
+                max-height: 300px;
+            }
+            
+            .calculator-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .calc-display {
+                grid-column: span 4;
+            }
+            
+            .calc-btn {
+                padding: 12px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Формулы для 1-11 классов</h1>
+            <p>Все формулы по алгебре, геометрии, физике и химии с интерактивными калькуляторами</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="formulas">Формулы</div>
+            <div class="tab" data-tab="calculator">Инженерный калькулятор</div>
+            <div class="tab" data-tab="notebook">Блокнот</div>
+        </div>
+        
+        <!-- Вкладка с формулами -->
+        <div class="tab-content active" id="formulas-tab">
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Поиск формулы или темы...">
+                <div class="search-suggestions"></div>
+                <select class="filter-select" id="subject-filter">
+                    <option value="all">Все предметы</option>
+                    <option value="algebra">Алгебра</option>
+                    <option value="geometry">Геометрия</option>
+                    <option value="physics">Физика</option>
+                    <option value="chemistry">Химия</option>
+                </select>
+                <select class="filter-select" id="class-filter">
+                    <option value="all">Все классы</option>
+                    <option value="1-4">1-4 классы</option>
+                    <option value="5-6">5-6 классы</option>
+                    <option value="7">7 класс</option>
+                    <option value="8">8 класс</option>
+                    <option value="9">9 класс</option>
+                    <option value="10">10 класс</option>
+                    <option value="11">11 класс</option>
+                </select>
+            </div>
+            
+            <div class="content">
+                <div class="sidebar">
+                    <ul class="subject-list">
+                        <!-- Алгебра -->
+                        <li class="subject-item">
+                            <div class="subject-title">
+                                <span>Алгебра</span>
+                                <span class="arrow">▶</span>
+                            </div>
+                            <ul class="class-list">
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>1-4 классы</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="algebra" data-class="1-4" data-topic="arithmetic">Арифметические действия</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="1-4" data-topic="fractions">Дроби</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="1-4" data-topic="units">Единицы измерения</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>5-6 классы</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="algebra" data-class="5-6" data-topic="decimals">Десятичные дроби</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="5-6" data-topic="proportions">Пропорции</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="5-6" data-topic="percentages">Проценты</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>7 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="algebra" data-class="7" data-topic="degree">Степени и корни</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="7" data-topic="formulas">Формулы сокращенного умножения</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="7" data-topic="linear">Линейные уравнения</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>8 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="algebra" data-class="8" data-topic="quadratic">Квадратные уравнения</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="8" data-topic="inequalities">Неравенства</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="8" data-topic="functions">Функции</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>9 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="algebra" data-class="9" data-topic="progressions">Прогрессии</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="9" data-topic="probability">Теория вероятностей</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="9" data-topic="statistics">Статистика</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>10 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="algebra" data-class="10" data-topic="trigonometry">Тригонометрия</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="10" data-topic="logarithms">Логарифмы</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="10" data-topic="complex">Комплексные числа</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>11 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="algebra" data-class="11" data-topic="derivatives">Производные</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="11" data-topic="integrals">Интегралы</li>
+                                        <li class="topic-item" data-subject="algebra" data-class="11" data-topic="limits">Пределы</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <!-- Геометрия -->
+                        <li class="subject-item">
+                            <div class="subject-title">
+                                <span>Геометрия</span>
+                                <span class="arrow">▶</span>
+                            </div>
+                            <ul class="class-list">
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>1-4 классы</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="geometry" data-class="1-4" data-topic="shapes">Геометрические фигуры</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="1-4" data-topic="perimeter">Периметр</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="1-4" data-topic="area">Площадь</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>5-6 классы</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="geometry" data-class="5-6" data-topic="angles">Углы</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="5-6" data-topic="symmetry">Симметрия</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="5-6" data-topic="volume">Объем</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>7 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="geometry" data-class="7" data-topic="triangles">Треугольники</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="7" data-topic="parallel">Параллельные прямые</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>8 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="geometry" data-class="8" data-topic="quadrilaterals">Четырехугольники</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="8" data-topic="circles">Окружность</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>9 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="geometry" data-class="9" data-topic="vectors">Векторы</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="9" data-topic="coordinates">Координаты</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>10 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="geometry" data-class="10" data-topic="stereometry">Стереометрия</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="10" data-topic="polyhedra">Многогранники</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>11 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="geometry" data-class="11" data-topic="bodies">Тела вращения</li>
+                                        <li class="topic-item" data-subject="geometry" data-class="11" data-topic="volume">Объемы тел</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <!-- Физика -->
+                        <li class="subject-item">
+                            <div class="subject-title">
+                                <span>Физика</span>
+                                <span class="arrow">▶</span>
+                            </div>
+                            <ul class="class-list">
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>7 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="physics" data-class="7" data-topic="mechanics">Механика</li>
+                                        <li class="topic-item" data-subject="physics" data-class="7" data-topic="pressure">Давление</li>
+                                        <li class="topic-item" data-subject="physics" data-class="7" data-topic="energy">Энергия</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>8 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="physics" data-class="8" data-topic="heat">Тепловые явления</li>
+                                        <li class="topic-item" data-subject="physics" data-class="8" data-topic="electricity">Электричество</li>
+                                        <li class="topic-item" data-subject="physics" data-class="8" data-topic="optics">Оптика</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>9 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="physics" data-class="9" data-topic="kinematics">Кинематика</li>
+                                        <li class="topic-item" data-subject="physics" data-class="9" data-topic="dynamics">Динамика</li>
+                                        <li class="topic-item" data-subject="physics" data-class="9" data-topic="oscillations">Колебания и волны</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>10 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="physics" data-class="10" data-topic="molecular">Молекулярная физика</li>
+                                        <li class="topic-item" data-subject="physics" data-class="10" data-topic="electrodynamics">Электродинамика</li>
+                                        <li class="topic-item" data-subject="physics" data-class="10" data-topic="relativity">Теория относительности</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>11 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="physics" data-class="11" data-topic="optics">Оптика</li>
+                                        <li class="topic-item" data-subject="physics" data-class="11" data-topic="quantum">Квантовая физика</li>
+                                        <li class="topic-item" data-subject="physics" data-class="11" data-topic="nuclear">Ядерная физика</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <!-- Химия -->
+                        <li class="subject-item">
+                            <div class="subject-title">
+                                <span>Химия</span>
+                                <span class="arrow">▶</span>
+                            </div>
+                            <ul class="class-list">
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>8 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="chemistry" data-class="8" data-topic="basic">Основные понятия</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="8" data-topic="reactions">Химические реакции</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="8" data-topic="elements">Периодическая система</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>9 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="chemistry" data-class="9" data-topic="solutions">Растворы</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="9" data-topic="elements">Химия элементов</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="9" data-topic="organic">Органическая химия</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>10 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="chemistry" data-class="10" data-topic="organic">Органическая химия</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="10" data-topic="hydrocarbons">Углеводороды</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="10" data-topic="oxygen">Кислородсодержащие соединения</li>
+                                    </ul>
+                                </li>
+                                <li class="class-item">
+                                    <div class="class-title">
+                                        <span>11 класс</span>
+                                        <span class="arrow">▶</span>
+                                    </div>
+                                    <ul class="topic-list">
+                                        <li class="topic-item" data-subject="chemistry" data-class="11" data-topic="biochemistry">Биохимия</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="11" data-topic="polymers">Полимеры</li>
+                                        <li class="topic-item" data-subject="chemistry" data-class="11" data-topic="analytical">Аналитическая химия</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="main-content">
+                    <div class="formula-container">
+                        <h2 class="formula-title">Выберите тему для отображения формул</h2>
+                        <div class="formula-display">
+                            Формулы появятся здесь после выбора темы
+                        </div>
+                        <div class="formula-explanation">
+                            Описание формулы и объяснение переменных появятся здесь
+                        </div>
+                        <div class="step-by-step">
+                            <h3>Пошаговое решение:</h3>
+                            <div class="steps-container"></div>
+                        </div>
+                        <div class="calculator">
+                            <div class="input-group">
+                                <!-- Поля для ввода появятся здесь динамически -->
+                            </div>
+                            <button class="calculate-btn">Решить</button>
+                            <button class="show-steps-btn">Показать шаги решения</button>
+                            <div class="result">
+                                Результат появится здесь
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h3>Рекомендуемые формулы:</h3>
+                        <div class="recommendations-list">
+                            <!-- Рекомендации появятся здесь -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вкладка с инженерным калькулятором -->
+        <div class="tab-content" id="calculator-tab">
+            <div class="calculator-container">
+                <div class="calc-display" id="calcDisplay">0</div>
+                <button class="calc-btn calc-clear" data-action="clear">C</button>
+                <button class="calc-btn calc-clear" data-action="clear-entry">CE</button>
+                <button class="calc-btn" data-action="backspace">⌫</button>
+                <button class="calc-btn calc-func" data-action="parenthesis">( )</button>
+                <button class="calc-btn calc-func" data-action="percent">%</button>
+                <button class="calc-btn calc-func" data-action="reciprocal">1/x</button>
+                
+                <button class="calc-btn calc-func" data-action="power">xʸ</button>
+                <button class="calc-btn calc-func" data-action="square">x²</button>
+                <button class="calc-btn calc-func" data-action="sqrt">√</button>
+                <button class="calc-btn calc-func" data-action="nth-root">ʸ√x</button>
+                <button class="calc-btn calc-func" data-action="fraction">a/b</button>
+                <button class="calc-btn calc-func" data-action="divide">/</button>
+                
+                <button class="calc-btn" data-value="7">7</button>
+                <button class="calc-btn" data-value="8">8</button>
+                <button class="calc-btn" data-value="9">9</button>
+                <button class="calc-btn calc-func" data-action="multiply">×</button>
+                <button class="calc-btn calc-func" data-action="sin">sin</button>
+                <button class="calc-btn calc-func" data-action="cos">cos</button>
+                
+                <button class="calc-btn" data-value="4">4</button>
+                <button class="calc-btn" data-value="5">5</button>
+                <button class="calc-btn" data-value="6">6</button>
+                <button class="calc-btn calc-func" data-action="subtract">-</button>
+                <button class="calc-btn calc-func" data-action="tan">tan</button>
+                <button class="calc-btn calc-func" data-action="log">log</button>
+                
+                <button class="calc-btn" data-value="1">1</button>
+                <button class="calc-btn" data-value="2">2</button>
+                <button class="calc-btn" data-value="3">3</button>
+                <button class="calc-btn calc-func" data-action="add">+</button>
+                <button class="calc-btn calc-func" data-action="ln">ln</button>
+                <button class="calc-btn calc-func" data-action="exp">eˣ</button>
+                
+                <button class="calc-btn" data-action="negate">±</button>
+                <button class="calc-btn" data-value="0">0</button>
+                <button class="calc-btn" data-value=".">.</button>
+                <button class="calc-btn calc-equals" data-action="equals">=</button>
+                <button class="calc-btn calc-func" data-action="pi">π</button>
+                <button class="calc-btn calc-func" data-action="e">e</button>
+            </div>
+        </div>
+        
+        <!-- Вкладка с блокнотом -->
+        <div class="tab-content" id="notebook-tab">
+            <div class="notebook-container">
+                <div class="notebook-tools">
+                    <button class="tool-btn active" data-tool="pencil">Карандаш</button>
+                    <button class="tool-btn" data-tool="text">Текст</button>
+                    <button class="tool-btn" data-tool="eraser">Ластик</button>
+                    <input type="color" class="color-picker" id="colorPicker" value="#000000">
+                    <span style="color: white; margin: 0 10px;">Размер:</span>
+                    <input type="range" id="brushSize" min="1" max="20" value="5">
+                    <button class="tool-btn" id="clearCanvas">Очистить</button>
+                    <button class="tool-btn" id="saveNote">Сохранить</button>
+                </div>
+                <div class="notebook-canvas-container">
+                    <canvas id="notebookCanvas"></canvas>
+                    <textarea class="notebook-textarea" id="notebookTextarea" placeholder="Введите текст здесь..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Расширенная база формул
+        const formulasData = {
+            algebra: {
+                "1-4": {
+                    arithmetic: {
+                        title: "Арифметические действия",
+                        formulas: [
+                            {
+                                name: "Сложение",
+                                formula: "a + b = c",
+                                explanation: "Сложение - это операция объединения двух чисел в одно.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return a + b;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return [
+                                            `Шаг 1: Записываем числа: ${a} и ${b}`,
+                                            `Шаг 2: Складываем единицы: ${a} + ${b}`,
+                                            `Шаг 3: Получаем результат: ${a + b}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Вычитание",
+                                formula: "a - b = c",
+                                explanation: "Вычитание - это операция нахождения разности двух чисел.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return a - b;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return [
+                                            `Шаг 1: Записываем числа: ${a} и ${b}`,
+                                            `Шаг 2: Вычитаем: ${a} - ${b}`,
+                                            `Шаг 3: Получаем результат: ${a - b}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Умножение",
+                                formula: "a × b = c",
+                                explanation: "Умножение - это операция повторного сложения.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return a * b;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return [
+                                            `Шаг 1: Записываем числа: ${a} и ${b}`,
+                                            `Шаг 2: Умножаем: ${a} × ${b}`,
+                                            `Шаг 3: Получаем результат: ${a * b}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Деление",
+                                formula: "a ÷ b = c",
+                                explanation: "Деление - это операция нахождения частного двух чисел.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        if (b === 0) return "Ошибка: деление на ноль";
+                                        return a / b;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        if (b === 0) return ["Ошибка: деление на ноль"];
+                                        return [
+                                            `Шаг 1: Записываем числа: ${a} и ${b}`,
+                                            `Шаг 2: Делим: ${a} ÷ ${b}`,
+                                            `Шаг 3: Получаем результат: ${a / b}`
+                                        ];
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    fractions: {
+                        title: "Дроби",
+                        formulas: [
+                            {
+                                name: "Сложение дробей",
+                                formula: "a/b + c/d = (ad + bc)/(bd)",
+                                explanation: "Чтобы сложить дроби с разными знаменателями, нужно привести их к общему знаменателю.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" },
+                                        { label: "c", value: "" },
+                                        { label: "d", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        const c = parseFloat(inputs.c);
+                                        const d = parseFloat(inputs.d);
+                                        if (b === 0 || d === 0) return "Ошибка: знаменатель не может быть нулем";
+                                        return (a*d + b*c) + "/" + (b*d);
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        const c = parseFloat(inputs.c);
+                                        const d = parseFloat(inputs.d);
+                                        if (b === 0 || d === 0) return ["Ошибка: знаменатель не может быть нулем"];
+                                        return [
+                                            `Шаг 1: Записываем дроби: ${a}/${b} и ${c}/${d}`,
+                                            `Шаг 2: Находим общий знаменатель: ${b} × ${d} = ${b*d}`,
+                                            `Шаг 3: Приводим дроби к общему знаменателю: ${a*d}/${b*d} и ${c*b}/${b*d}`,
+                                            `Шаг 4: Складываем числители: ${a*d} + ${c*b} = ${a*d + c*b}`,
+                                            `Шаг 5: Получаем результат: ${a*d + c*b}/${b*d}`
+                                        ];
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                7: {
+                    degree: {
+                        title: "Степени и корни",
+                        formulas: [
+                            {
+                                name: "Умножение степеней",
+                                formula: "a<sup>m</sup> ⋅ a<sup>n</sup> = a<sup>m+n</sup>",
+                                explanation: "При умножении степеней с одинаковыми основаниями показатели складываются.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "m", value: "" },
+                                        { label: "n", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const m = parseFloat(inputs.m);
+                                        const n = parseFloat(inputs.n);
+                                        return a ** (m + n);
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const m = parseFloat(inputs.m);
+                                        const n = parseFloat(inputs.n);
+                                        return [
+                                            `Шаг 1: Записываем выражение: ${a}<sup>${m}</sup> ⋅ ${a}<sup>${n}</sup>`,
+                                            `Шаг 2: Применяем правило: a<sup>m</sup> ⋅ a<sup>n</sup> = a<sup>m+n</sup>`,
+                                            `Шаг 3: Складываем показатели: ${m} + ${n} = ${m+n}`,
+                                            `Шаг 4: Получаем результат: ${a}<sup>${m+n}</sup> = ${a ** (m + n)}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Деление степеней",
+                                formula: "a<sup>m</sup> / a<sup>n</sup> = a<sup>m-n</sup>",
+                                explanation: "При делении степеней с одинаковыми основаниями показатели вычитаются.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "m", value: "" },
+                                        { label: "n", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const m = parseFloat(inputs.m);
+                                        const n = parseFloat(inputs.n);
+                                        return a ** (m - n);
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const m = parseFloat(inputs.m);
+                                        const n = parseFloat(inputs.n);
+                                        return [
+                                            `Шаг 1: Записываем выражение: ${a}<sup>${m}</sup> / ${a}<sup>${n}</sup>`,
+                                            `Шаг 2: Применяем правило: a<sup>m</sup> / a<sup>n</sup> = a<sup>m-n</sup>`,
+                                            `Шаг 3: Вычитаем показатели: ${m} - ${n} = ${m-n}`,
+                                            `Шаг 4: Получаем результат: ${a}<sup>${m-n}</sup> = ${a ** (m - n)}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Возведение степени в степень",
+                                formula: "(a<sup>m</sup>)<sup>n</sup> = a<sup>m⋅n</sup>",
+                                explanation: "При возведении степени в степень показатели перемножаются.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "m", value: "" },
+                                        { label: "n", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const m = parseFloat(inputs.m);
+                                        const n = parseFloat(inputs.n);
+                                        return a ** (m * n);
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const m = parseFloat(inputs.m);
+                                        const n = parseFloat(inputs.n);
+                                        return [
+                                            `Шаг 1: Записываем выражение: (${a}<sup>${m}</sup>)<sup>${n}</sup>`,
+                                            `Шаг 2: Применяем правило: (a<sup>m</sup>)<sup>n</sup> = a<sup>m⋅n</sup>`,
+                                            `Шаг 3: Перемножаем показатели: ${m} × ${n} = ${m*n}`,
+                                            `Шаг 4: Получаем результат: ${a}<sup>${m*n}</sup> = ${a ** (m * n)}`
+                                        ];
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    formulas: {
+                        title: "Формулы сокращенного умножения",
+                        formulas: [
+                            {
+                                name: "Квадрат суммы",
+                                formula: "(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup>",
+                                explanation: "Квадрат суммы двух выражений равен квадрату первого плюс удвоенное произведение первого на второе плюс квадрат второго.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return a*a + 2*a*b + b*b;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return [
+                                            `Шаг 1: Записываем выражение: (${a} + ${b})<sup>2</sup>`,
+                                            `Шаг 2: Применяем формулу: (a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup>`,
+                                            `Шаг 3: Подставляем значения: ${a}<sup>2</sup> + 2×${a}×${b} + ${b}<sup>2</sup>`,
+                                            `Шаг 4: Вычисляем: ${a*a} + ${2*a*b} + ${b*b}`,
+                                            `Шаг 5: Получаем результат: ${a*a + 2*a*b + b*b}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Квадрат разности",
+                                formula: "(a - b)<sup>2</sup> = a<sup>2</sup> - 2ab + b<sup>2</sup>",
+                                explanation: "Квадрат разности двух выражений равен квадрату первого минус удвоенное произведение первого на второе плюс квадрат второго.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return a*a - 2*a*b + b*b;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return [
+                                            `Шаг 1: Записываем выражение: (${a} - ${b})<sup>2</sup>`,
+                                            `Шаг 2: Применяем формулу: (a - b)<sup>2</sup> = a<sup>2</sup> - 2ab + b<sup>2</sup>`,
+                                            `Шаг 3: Подставляем значения: ${a}<sup>2</sup> - 2×${a}×${b} + ${b}<sup>2</sup>`,
+                                            `Шаг 4: Вычисляем: ${a*a} - ${2*a*b} + ${b*b}`,
+                                            `Шаг 5: Получаем результат: ${a*a - 2*a*b + b*b}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Разность квадратов",
+                                formula: "a<sup>2</sup> - b<sup>2</sup> = (a - b)(a + b)",
+                                explanation: "Разность квадратов двух выражений равна произведению разности этих выражений на их сумму.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return (a - b) * (a + b);
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return [
+                                            `Шаг 1: Записываем выражение: ${a}<sup>2</sup> - ${b}<sup>2</sup>`,
+                                            `Шаг 2: Применяем формулу: a<sup>2</sup> - b<sup>2</sup> = (a - b)(a + b)`,
+                                            `Шаг 3: Подставляем значения: (${a} - ${b}) × (${a} + ${b})`,
+                                            `Шаг 4: Вычисляем: ${a-b} × ${a+b}`,
+                                            `Шаг 5: Получаем результат: ${(a - b) * (a + b)}`
+                                        ];
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    linear: {
+                        title: "Линейные уравнения",
+                        formulas: [
+                            {
+                                name: "Линейное уравнение",
+                                formula: "ax + b = 0",
+                                explanation: "Линейное уравнение - уравнение первой степени.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        if (a === 0) return b === 0 ? "Бесконечно много решений" : "Нет решений";
+                                        return -b / a;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        if (a === 0) {
+                                            if (b === 0) return ["Уравнение 0 = 0 верно для любого x", "Бесконечно много решений"];
+                                            return ["Уравнение " + b + " = 0 неверно", "Нет решений"];
+                                        }
+                                        return [
+                                            `Шаг 1: Записываем уравнение: ${a}x + ${b} = 0`,
+                                            `Шаг 2: Переносим ${b} вправо: ${a}x = ${-b}`,
+                                            `Шаг 3: Делим на ${a}: x = ${-b} / ${a}`,
+                                            `Шаг 4: Получаем результат: x = ${-b / a}`
+                                        ];
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                8: {
+                    quadratic: {
+                        title: "Квадратные уравнения",
+                        formulas: [
+                            {
+                                name: "Формула корней квадратного уравнения",
+                                formula: "x = (-b ± √(b<sup>2</sup> - 4ac)) / (2a)",
+                                explanation: "Формула для нахождения корней квадратного уравнения ax² + bx + c = 0. Дискриминант D = b² - 4ac.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a", value: "" },
+                                        { label: "b", value: "" },
+                                        { label: "c", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        const c = parseFloat(inputs.c);
+                                        const D = b*b - 4*a*c;
+                                        
+                                        if (D < 0) return "Действительных корней нет";
+                                        if (D === 0) return `x = ${-b/(2*a)}`;
+                                        
+                                        const x1 = (-b + Math.sqrt(D))/(2*a);
+                                        const x2 = (-b - Math.sqrt(D))/(2*a);
+                                        return `x₁ = ${x1}, x₂ = ${x2}`;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        const c = parseFloat(inputs.c);
+                                        const D = b*b - 4*a*c;
+                                        
+                                        if (a === 0) return ["Это не квадратное уравнение (a = 0)"];
+                                        
+                                        let steps = [
+                                            `Шаг 1: Записываем уравнение: ${a}x² + ${b}x + ${c} = 0`,
+                                            `Шаг 2: Вычисляем дискриминант: D = b² - 4ac = ${b}² - 4×${a}×${c} = ${D}`
+                                        ];
+                                        
+                                        if (D < 0) {
+                                            steps.push("Шаг 3: D < 0, действительных корней нет");
+                                        } else if (D === 0) {
+                                            steps.push(`Шаг 3: D = 0, один корень: x = -b/(2a) = -${b}/(2×${a}) = ${-b/(2*a)}`);
+                                        } else {
+                                            steps.push(
+                                                `Шаг 3: D > 0, два корня:`,
+                                                `x₁ = (-b + √D)/(2a) = (-${b} + √${D})/(2×${a}) = ${(-b + Math.sqrt(D))/(2*a)}`,
+                                                `x₂ = (-b - √D)/(2a) = (-${b} - √${D})/(2×${a}) = ${(-b - Math.sqrt(D))/(2*a)}`
+                                            );
+                                        }
+                                        
+                                        return steps;
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+                // Добавьте остальные классы и темы по аналогии
+            },
+            geometry: {
+                "1-4": {
+                    area: {
+                        title: "Площадь фигур",
+                        formulas: [
+                            {
+                                name: "Площадь прямоугольника",
+                                formula: "S = a × b",
+                                explanation: "Площадь прямоугольника равна произведению длины на ширину.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a (длина)", value: "" },
+                                        { label: "b (ширина)", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return a * b;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const b = parseFloat(inputs.b);
+                                        return [
+                                            `Шаг 1: Записываем формулу: S = a × b`,
+                                            `Шаг 2: Подставляем значения: S = ${a} × ${b}`,
+                                            `Шаг 3: Вычисляем: S = ${a * b}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Площадь квадрата",
+                                formula: "S = a<sup>2</sup>",
+                                explanation: "Площадь квадрата равна квадрату длины его стороны.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a (сторона)", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        return a * a;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        return [
+                                            `Шаг 1: Записываем формулу: S = a²`,
+                                            `Шаг 2: Подставляем значение: S = ${a}²`,
+                                            `Шаг 3: Вычисляем: S = ${a * a}`
+                                        ];
+                                    }
+                                }
+                            },
+                            {
+                                name: "Площадь треугольника",
+                                formula: "S = (a × h) / 2",
+                                explanation: "Площадь треугольника равна половине произведения основания на высоту.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a (основание)", value: "" },
+                                        { label: "h (высота)", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const h = parseFloat(inputs.h);
+                                        return (a * h) / 2;
+                                    },
+                                    steps: function(inputs) {
+                                        const a = parseFloat(inputs.a);
+                                        const h = parseFloat(inputs.h);
+                                        return [
+                                            `Шаг 1: Записываем формулу: S = (a × h) / 2`,
+                                            `Шаг 2: Подставляем значения: S = (${a} × ${h}) / 2`,
+                                            `Шаг 3: Вычисляем: S = ${a * h} / 2`,
+                                            `Шаг 4: Получаем результат: S = ${(a * h) / 2}`
+                                        ];
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                7: {
+                    triangles: {
+                        title: "Треугольники",
+                        formulas: [
+                            {
+                                name: "Теорема Пифагора",
+                                formula: "a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>",
+                                explanation: "В прямоугольном треугольнике квадрат гипотенузы равен сумме квадратов катетов.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "a (катет)", value: "" },
+                                        { label: "b (катет)", value: "" },
+                                        { label: "c (гипотенуза)", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const a = inputs.a ? parseFloat(inputs.a) : null;
+                                        const b = inputs.b ? parseFloat(inputs.b) : null;
+                                        const c = inputs.c ? parseFloat(inputs.c) : null;
+                                        
+                                        if (a && b && !c) return `c = ${Math.sqrt(a*a + b*b)}`;
+                                        if (a && c && !b) return `b = ${Math.sqrt(c*c - a*a)}`;
+                                        if (b && c && !a) return `a = ${Math.sqrt(c*c - b*b)}`;
+                                        
+                                        return "Введите две известные величины";
+                                    },
+                                    steps: function(inputs) {
+                                        const a = inputs.a ? parseFloat(inputs.a) : null;
+                                        const b = inputs.b ? parseFloat(inputs.b) : null;
+                                        const c = inputs.c ? parseFloat(inputs.c) : null;
+                                        
+                                        if (a && b && !c) {
+                                            return [
+                                                `Шаг 1: Записываем теорему Пифагора: a² + b² = c²`,
+                                                `Шаг 2: Подставляем значения: ${a}² + ${b}² = c²`,
+                                                `Шаг 3: Вычисляем: ${a*a} + ${b*b} = c²`,
+                                                `Шаг 4: Находим c: c = √${a*a + b*b}`,
+                                                `Шаг 5: Получаем результат: c = ${Math.sqrt(a*a + b*b)}`
+                                            ];
+                                        } else if (a && c && !b) {
+                                            return [
+                                                `Шаг 1: Записываем теорему Пифагора: a² + b² = c²`,
+                                                `Шаг 2: Выражаем b: b² = c² - a²`,
+                                                `Шаг 3: Подставляем значения: b² = ${c}² - ${a}²`,
+                                                `Шаг 4: Вычисляем: b² = ${c*c} - ${a*a} = ${c*c - a*a}`,
+                                                `Шаг 5: Находим b: b = √${c*c - a*a}`,
+                                                `Шаг 6: Получаем результат: b = ${Math.sqrt(c*c - a*a)}`
+                                            ];
+                                        } else if (b && c && !a) {
+                                            return [
+                                                `Шаг 1: Записываем теорему Пифагора: a² + b² = c²`,
+                                                `Шаг 2: Выражаем a: a² = c² - b²`,
+                                                `Шаг 3: Подставляем значения: a² = ${c}² - ${b}²`,
+                                                `Шаг 4: Вычисляем: a² = ${c*c} - ${b*b} = ${c*c - b*b}`,
+                                                `Шаг 5: Находим a: a = √${c*c - b*b}`,
+                                                `Шаг 6: Получаем результат: a = ${Math.sqrt(c*c - b*b)}`
+                                            ];
+                                        } else {
+                                            return ["Введите две известные величины"];
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+                // Добавьте остальные классы и темы по аналогии
+            },
+            physics: {
+                7: {
+                    mechanics: {
+                        title: "Механика",
+                        formulas: [
+                            {
+                                name: "Скорость",
+                                formula: "v = s / t",
+                                explanation: "Скорость равна расстоянию, деленному на время.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "s (расстояние, м)", value: "" },
+                                        { label: "t (время, с)", value: "" },
+                                        { label: "v (скорость, м/с)", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const s = inputs.s ? parseFloat(inputs.s) : null;
+                                        const t = inputs.t ? parseFloat(inputs.t) : null;
+                                        const v = inputs.v ? parseFloat(inputs.v) : null;
+                                        
+                                        if (s && t && !v) return `v = ${s/t} м/с`;
+                                        if (v && t && !s) return `s = ${v*t} м`;
+                                        if (s && v && !t) return `t = ${s/v} с`;
+                                        
+                                        return "Введите две известные величины";
+                                    },
+                                    steps: function(inputs) {
+                                        const s = inputs.s ? parseFloat(inputs.s) : null;
+                                        const t = inputs.t ? parseFloat(inputs.t) : null;
+                                        const v = inputs.v ? parseFloat(inputs.v) : null;
+                                        
+                                        if (s && t && !v) {
+                                            return [
+                                                `Шаг 1: Записываем формулу: v = s / t`,
+                                                `Шаг 2: Подставляем значения: v = ${s} / ${t}`,
+                                                `Шаг 3: Вычисляем: v = ${s/t} м/с`
+                                            ];
+                                        } else if (v && t && !s) {
+                                            return [
+                                                `Шаг 1: Записываем формулу: s = v × t`,
+                                                `Шаг 2: Подставляем значения: s = ${v} × ${t}`,
+                                                `Шаг 3: Вычисляем: s = ${v*t} м`
+                                            ];
+                                        } else if (s && v && !t) {
+                                            return [
+                                                `Шаг 1: Записываем формулу: t = s / v`,
+                                                `Шаг 2: Подставляем значения: t = ${s} / ${v}`,
+                                                `Шаг 3: Вычисляем: t = ${s/v} с`
+                                            ];
+                                        } else {
+                                            return ["Введите две известные величины"];
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+                // Добавьте остальные классы и темы по аналогии
+            },
+            chemistry: {
+                8: {
+                    basic: {
+                        title: "Основные понятия",
+                        formulas: [
+                            {
+                                name: "Количество вещества",
+                                formula: "n = m / M",
+                                explanation: "Количество вещества равно массе, деленной на молярную массу.",
+                                calculator: {
+                                    inputs: [
+                                        { label: "m (масса, г)", value: "" },
+                                        { label: "M (молярная масса, г/моль)", value: "" },
+                                        { label: "n (количество вещества, моль)", value: "" }
+                                    ],
+                                    calculate: function(inputs) {
+                                        const m = inputs.m ? parseFloat(inputs.m) : null;
+                                        const M = inputs.M ? parseFloat(inputs.M) : null;
+                                        const n = inputs.n ? parseFloat(inputs.n) : null;
+                                        
+                                        if (m && M && !n) return `n = ${m/M} моль`;
+                                        if (n && M && !m) return `m = ${n*M} г`;
+                                        if (m && n && !M) return `M = ${m/n} г/моль`;
+                                        
+                                        return "Введите две известные величины";
+                                    },
+                                    steps: function(inputs) {
+                                        const m = inputs.m ? parseFloat(inputs.m) : null;
+                                        const M = inputs.M ? parseFloat(inputs.M) : null;
+                                        const n = inputs.n ? parseFloat(inputs.n) : null;
+                                        
+                                        if (m && M && !n) {
+                                            return [
+                                                `Шаг 1: Записываем формулу: n = m / M`,
+                                                `Шаг 2: Подставляем значения: n = ${m} / ${M}`,
+                                                `Шаг 3: Вычисляем: n = ${m/M} моль`
+                                            ];
+                                        } else if (n && M && !m) {
+                                            return [
+                                                `Шаг 1: Записываем формулу: m = n × M`,
+                                                `Шаг 2: Подставляем значения: m = ${n} × ${M}`,
+                                                `Шаг 3: Вычисляем: m = ${n*M} г`
+                                            ];
+                                        } else if (m && n && !M) {
+                                            return [
+                                                `Шаг 1: Записываем формулу: M = m / n`,
+                                                `Шаг 2: Подставляем значения: M = ${m} / ${n}`,
+                                                `Шаг 3: Вычисляем: M = ${m/n} г/моль`
+                                            ];
+                                        } else {
+                                            return ["Введите две известные величины"];
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+                // Добавьте остальные классы и темы по аналогии
+            }
+        };
+
+        // Инженерный калькулятор
+        class EngineeringCalculator {
+            constructor() {
+                this.display = document.getElementById('calcDisplay');
+                this.currentInput = '0';
+                this.previousInput = '';
+                this.operation = null;
+                this.waitingForNewInput = false;
+                this.parenthesisOpen = false;
+                
+                this.setupEventListeners();
+            }
+            
+            setupEventListeners() {
+                const buttons = document.querySelectorAll('.calc-btn');
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const value = button.getAttribute('data-value');
+                        const action = button.getAttribute('data-action');
+                        
+                        if (value !== null) {
+                            this.inputNumber(value);
+                        } else if (action !== null) {
+                            this.performAction(action);
+                        }
+                    });
+                });
+            }
+            
+            inputNumber(num) {
+                if (this.waitingForNewInput) {
+                    this.currentInput = num;
+                    this.waitingForNewInput = false;
+                } else {
+                    this.currentInput = this.currentInput === '0' ? num : this.currentInput + num;
+                }
+                this.updateDisplay();
+            }
+            
+            performAction(action) {
+                switch (action) {
+                    case 'clear':
+                        this.clear();
+                        break;
+                    case 'clear-entry':
+                        this.clearEntry();
+                        break;
+                    case 'backspace':
+                        this.backspace();
+                        break;
+                    case 'add':
+                    case 'subtract':
+                    case 'multiply':
+                    case 'divide':
+                        this.setOperation(action);
+                        break;
+                    case 'equals':
+                        this.calculate();
+                        break;
+                    case 'negate':
+                        this.negate();
+                        break;
+                    case 'sqrt':
+                        this.sqrt();
+                        break;
+                    case 'square':
+                        this.square();
+                        break;
+                    case 'power':
+                        this.power();
+                        break;
+                    case 'nth-root':
+                        this.nthRoot();
+                        break;
+                    case 'fraction':
+                        this.fraction();
+                        break;
+                    case 'percent':
+                        this.percent();
+                        break;
+                    case 'reciprocal':
+                        this.reciprocal();
+                        break;
+                    case 'parenthesis':
+                        this.parenthesis();
+                        break;
+                    case 'sin':
+                    case 'cos':
+                    case 'tan':
+                    case 'log':
+                    case 'ln':
+                    case 'exp':
+                        this.function(action);
+                        break;
+                    case 'pi':
+                        this.inputPi();
+                        break;
+                    case 'e':
+                        this.inputE();
+                        break;
+                }
+            }
+            
+            clear() {
+                this.currentInput = '0';
+                this.previousInput = '';
+                this.operation = null;
+                this.waitingForNewInput = false;
+                this.parenthesisOpen = false;
+                this.updateDisplay();
+            }
+            
+            clearEntry() {
+                this.currentInput = '0';
+                this.updateDisplay();
+            }
+            
+            backspace() {
+                if (this.currentInput.length > 1) {
+                    this.currentInput = this.currentInput.slice(0, -1);
+                } else {
+                    this.currentInput = '0';
+                }
+                this.updateDisplay();
+            }
+            
+            setOperation(op) {
+                if (this.operation !== null) {
+                    this.calculate();
+                }
+                
+                this.operation = op;
+                this.previousInput = this.currentInput;
+                this.waitingForNewInput = true;
+            }
+            
+            calculate() {
+                if (this.operation === null || this.waitingForNewInput) {
+                    return;
+                }
+                
+                const prev = parseFloat(this.previousInput);
+                const current = parseFloat(this.currentInput);
+                let result;
+                
+                switch (this.operation) {
+                    case 'add':
+                        result = prev + current;
+                        break;
+                    case 'subtract':
+                        result = prev - current;
+                        break;
+                    case 'multiply':
+                        result = prev * current;
+                        break;
+                    case 'divide':
+                        result = prev / current;
+                        break;
+                    case 'power':
+                        result = Math.pow(prev, current);
+                        break;
+                    default:
+                        return;
+                }
+                
+                this.currentInput = String(result);
+                this.operation = null;
+                this.previousInput = '';
+                this.waitingForNewInput = true;
+                this.updateDisplay();
+            }
+            
+            negate() {
+                this.currentInput = String(-parseFloat(this.currentInput));
+                this.updateDisplay();
+            }
+            
+            sqrt() {
+                this.currentInput = String(Math.sqrt(parseFloat(this.currentInput)));
+                this.updateDisplay();
+            }
+            
+            square() {
+                this.currentInput = String(Math.pow(parseFloat(this.currentInput), 2));
+                this.updateDisplay();
+            }
+            
+            power() {
+                this.setOperation('power');
+            }
+            
+            nthRoot() {
+                const current = parseFloat(this.currentInput);
+                if (current === 0) return;
+                this.currentInput = `Math.pow(${current}, 1/`;
+                this.waitingForNewInput = true;
+                this.updateDisplay();
+            }
+            
+            fraction() {
+                this.currentInput += '/';
+                this.updateDisplay();
+            }
+            
+            percent() {
+                this.currentInput = String(parseFloat(this.currentInput) / 100);
+                this.updateDisplay();
+            }
+            
+            reciprocal() {
+                this.currentInput = String(1 / parseFloat(this.currentInput));
+                this.updateDisplay();
+            }
+            
+            parenthesis() {
+                if (this.parenthesisOpen) {
+                    this.currentInput += ')';
+                    this.parenthesisOpen = false;
+                } else {
+                    this.currentInput += '(';
+                    this.parenthesisOpen = true;
+                }
+                this.updateDisplay();
+            }
+            
+            function(func) {
+                this.currentInput = `${func}(${this.currentInput}`;
+                this.waitingForNewInput = true;
+                this.updateDisplay();
+            }
+            
+            inputPi() {
+                this.inputNumber('3.14159');
+            }
+            
+            inputE() {
+                this.inputNumber('2.71828');
+            }
+            
+            updateDisplay() {
+                this.display.textContent = this.currentInput;
+            }
+        }
+
+        // Блокнот для рисования и записей
+        class Notebook {
+            constructor() {
+                this.canvas = document.getElementById('notebookCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.textarea = document.getElementById('notebookTextarea');
+                this.currentTool = 'pencil';
+                this.isDrawing = false;
+                this.lastX = 0;
+                this.lastY = 0;
+                this.color = '#000000';
+                this.brushSize = 5;
+                
+                this.setupEventListeners();
+                this.resizeCanvas();
+            }
+            
+            setupEventListeners() {
+                // Обработчики для инструментов
+                const toolButtons = document.querySelectorAll('.tool-btn[data-tool]');
+                toolButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        toolButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        this.currentTool = button.getAttribute('data-tool');
+                        this.switchTool();
+                    });
+                });
+                
+                // Обработчики для рисования
+                this.canvas.addEventListener('mousedown', this.startDrawing.bind(this));
+                this.canvas.addEventListener('mousemove', this.draw.bind(this));
+                this.canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
+                this.canvas.addEventListener('mouseout', this.stopDrawing.bind(this));
+                
+                // Обработчики для сенсорных устройств
+                this.canvas.addEventListener('touchstart', this.handleTouch.bind(this));
+                this.canvas.addEventListener('touchmove', this.handleTouch.bind(this));
+                this.canvas.addEventListener('touchend', this.stopDrawing.bind(this));
+                
+                // Обработчики для дополнительных инструментов
+                document.getElementById('colorPicker').addEventListener('input', (e) => {
+                    this.color = e.target.value;
+                });
+                
+                document.getElementById('brushSize').addEventListener('input', (e) => {
+                    this.brushSize = parseInt(e.target.value);
+                });
+                
+                document.getElementById('clearCanvas').addEventListener('click', () => {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                });
+                
+                document.getElementById('saveNote').addEventListener('click', () => {
+                    this.saveNote();
+                });
+                
+                // Обработчик изменения размера окна
+                window.addEventListener('resize', () => {
+                    this.resizeCanvas();
+                });
+            }
+            
+            switchTool() {
+                if (this.currentTool === 'text') {
+                    this.canvas.style.display = 'none';
+                    this.textarea.style.display = 'block';
+                } else {
+                    this.canvas.style.display = 'block';
+                    this.textarea.style.display = 'none';
+                }
+            }
+            
+            startDrawing(e) {
+                if (this.currentTool === 'pencil' || this.currentTool === 'eraser') {
+                    this.isDrawing = true;
+                    const pos = this.getMousePos(e);
+                    [this.lastX, this.lastY] = [pos.x, pos.y];
+                }
+            }
+            
+            draw(e) {
+                if (!this.isDrawing) return;
+                
+                const pos = this.getMousePos(e);
+                this.ctx.beginPath();
+                this.ctx.lineWidth = this.brushSize;
+                this.ctx.lineCap = 'round';
+                
+                if (this.currentTool === 'pencil') {
+                    this.ctx.strokeStyle = this.color;
+                } else if (this.currentTool === 'eraser') {
+                    this.ctx.strokeStyle = '#ffffff';
+                }
+                
+                this.ctx.moveTo(this.lastX, this.lastY);
+                this.ctx.lineTo(pos.x, pos.y);
+                this.ctx.stroke();
+                
+                [this.lastX, this.lastY] = [pos.x, pos.y];
+            }
+            
+            stopDrawing() {
+                this.isDrawing = false;
+            }
+            
+            getMousePos(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                let clientX, clientY;
+                
+                if (e.type.includes('touch')) {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+                
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+            
+            handleTouch(e) {
+                e.preventDefault();
+                if (e.type === 'touchstart') {
+                    this.startDrawing(e);
+                } else if (e.type === 'touchmove') {
+                    this.draw(e);
+                }
+            }
+            
+            resizeCanvas() {
+                const container = this.canvas.parentElement;
+                this.canvas.width = container.clientWidth;
+                this.canvas.height = container.clientHeight;
+                
+                // Перерисовываем содержимое при изменении размера
+                this.ctx.fillStyle = 'white';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+            
+            saveNote() {
+                if (this.currentTool === 'text') {
+                    const text = this.textarea.value;
+                    // Здесь можно реализовать сохранение текста
+                    alert('Текст сохранен!');
+                } else {
+                    // Здесь можно реализовать сохранение изображения
+                    alert('Рисунок сохранен!');
+                }
+            }
+        }
+
+        // Функции для работы с интерфейсом формул
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация калькулятора и блокнота
+            const calculator = new EngineeringCalculator();
+            const notebook = new Notebook();
+            
+            // Обработчики для вкладок
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Убираем активный класс со всех вкладок и контента
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс к текущей вкладке и контенту
+                    this.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Обработчики для раскрытия/скрытия списков
+            const subjectTitles = document.querySelectorAll('.subject-title');
+            subjectTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const classList = this.parentElement.querySelector('.class-list');
+                    const arrow = this.querySelector('.arrow');
+                    
+                    classList.classList.toggle('active');
+                    arrow.classList.toggle('rotated');
+                });
+            });
+            
+            const classTitles = document.querySelectorAll('.class-title');
+            classTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const topicList = this.parentElement.querySelector('.topic-list');
+                    const arrow = this.querySelector('.arrow');
+                    
+                    topicList.classList.toggle('active');
+                    arrow.classList.toggle('rotated');
+                });
+            });
+            
+            // Обработчики для выбора темы
+            const topicItems = document.querySelectorAll('.topic-item');
+            topicItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const subject = this.dataset.subject;
+                    const classNum = this.dataset.class;
+                    const topic = this.dataset.topic;
+                    
+                    displayFormulas(subject, classNum, topic);
+                    updateRecommendations(subject, classNum, topic);
+                });
+            });
+            
+            // Обработчик для кнопки "Решить"
+            document.querySelector('.calculate-btn').addEventListener('click', function() {
+                calculateFormula();
+            });
+            
+            // Обработчик для кнопки "Показать шаги решения"
+            document.querySelector('.show-steps-btn').addEventListener('click', function() {
+                showSteps();
+            });
+            
+            // Обработчик для поиска
+            const searchBox = document.querySelector('.search-box');
+            const searchSuggestions = document.querySelector('.search-suggestions');
+            
+            searchBox.addEventListener('input', function() {
+                const query = this.value;
+                if (query.length > 0) {
+                    showSearchSuggestions(query);
+                    searchSuggestions.style.display = 'block';
+                } else {
+                    searchSuggestions.style.display = 'none';
+                }
+            });
+            
+            // Закрытие подсказок при клике вне области поиска
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-container')) {
+                    searchSuggestions.style.display = 'none';
+                }
+            });
+            
+            // Обработчики для фильтров
+            document.getElementById('subject-filter').addEventListener('change', function() {
+                applyFilters();
+            });
+            
+            document.getElementById('class-filter').addEventListener('change', function() {
+                applyFilters();
+            });
+        });
+        
+        // Функция отображения формул
+        function displayFormulas(subject, classNum, topic) {
+            const formulaData = formulasData[subject]?.[classNum]?.[topic];
+            if (!formulaData) {
+                // Если данные не найдены, показываем сообщение
+                const formulaContainer = document.querySelector('.formula-container');
+                formulaContainer.innerHTML = `
+                    <h2 class="formula-title">Тема не найдена</h2>
+                    <div class="formula-display">
+                        Информация по выбранной теме пока недоступна.
+                    </div>
+                `;
+                return;
+            }
+            
+            const formulaContainer = document.querySelector('.formula-container');
+            const formulaTitle = formulaContainer.querySelector('.formula-title');
+            const formulaDisplay = formulaContainer.querySelector('.formula-display');
+            const formulaExplanation = formulaContainer.querySelector('.formula-explanation');
+            const stepByStep = formulaContainer.querySelector('.step-by-step');
+            const inputGroup = formulaContainer.querySelector('.input-group');
+            const result = formulaContainer.querySelector('.result');
+            
+            // Очищаем контейнер
+            formulaDisplay.innerHTML = '';
+            formulaExplanation.innerHTML = '';
+            stepByStep.style.display = 'none';
+            inputGroup.innerHTML = '';
+            result.style.display = 'none';
+            
+            // Устанавливаем заголовок
+            formulaTitle.textContent = formulaData.title;
+            
+            // Создаем аккордеон для формул
+            formulaData.formulas.forEach((formula, index) => {
+                const formulaElement = document.createElement('div');
+                formulaElement.className = 'formula-item';
+                formulaElement.innerHTML = `
+                    <h3>${formula.name}</h3>
+                    <div class="formula">${formula.formula}</div>
+                    <div class="explanation">${formula.explanation}</div>
+                    <button class="use-formula-btn" data-index="${index}">Использовать формулу</button>
+                `;
+                
+                formulaDisplay.appendChild(formulaElement);
+                
+                // Обработчик для кнопки "Использовать формулу"
+                formulaElement.querySelector('.use-formula-btn').addEventListener('click', function() {
+                    const formulaIndex = parseInt(this.dataset.index);
+                    setupCalculator(formulaData.formulas[formulaIndex]);
+                });
+            });
+        }
+        
+        // Функция настройки калькулятора
+        function setupCalculator(formula) {
+            const inputGroup = document.querySelector('.input-group');
+            const result = document.querySelector('.result');
+            const stepByStep = document.querySelector('.step-by-step');
+            
+            // Очищаем поля ввода
+            inputGroup.innerHTML = '';
+            result.style.display = 'none';
+            stepByStep.style.display = 'none';
+            
+            // Создаем поля ввода
+            formula.calculator.inputs.forEach(input => {
+                const inputField = document.createElement('input');
+                inputField.type = 'number';
+                inputField.className = 'input-field';
+                inputField.placeholder = input.label;
+                inputField.dataset.label = input.label;
+                inputField.value = input.value;
+                
+                inputGroup.appendChild(inputField);
+            });
+            
+            // Сохраняем данные формулы для использования при нажатии кнопки
+            inputGroup.dataset.formulaData = JSON.stringify(formula);
+        }
+        
+        // Функция расчета формулы
+        function calculateFormula() {
+            const inputFields = document.querySelectorAll('.input-field');
+            const result = document.querySelector('.result');
+            const formulaDataString = document.querySelector('.input-group').dataset.formulaData;
+            
+            if (!formulaDataString) {
+                result.textContent = "Сначала выберите формулу";
+                result.style.display = 'block';
+                return;
+            }
+            
+            // Восстанавливаем данные формулы из строки
+            const formulaData = JSON.parse(formulaDataString);
+            
+            // Собираем значения полей ввода
+            const inputs = {};
+            inputFields.forEach(field => {
+                inputs[field.dataset.label] = field.value;
+            });
+            
+            // Выполняем расчет
+            try {
+                const calculationResult = formulaData.calculator.calculate(inputs);
+                result.textContent = `Результат: ${calculationResult}`;
+                result.style.display = 'block';
+                
+                // Сохраняем данные для пошагового решения
+                result.dataset.formulaData = formulaDataString;
+                result.dataset.inputs = JSON.stringify(inputs);
+            } catch (error) {
+                result.textContent = "Ошибка расчета: " + error.message;
+                result.style.display = 'block';
+            }
+        }
+        
+        // Функция показа пошагового решения
+        function showSteps() {
+            const result = document.querySelector('.result');
+            const stepByStep = document.querySelector('.step-by-step');
+            const stepsContainer = stepByStep.querySelector('.steps-container');
+            
+            if (!result.dataset.formulaData || !result.dataset.inputs) {
+                alert("Сначала выполните расчет формулы");
+                return;
+            }
+            
+            // Восстанавливаем данные формулы и вводы
+            const formulaData = JSON.parse(result.dataset.formulaData);
+            const inputs = JSON.parse(result.dataset.inputs);
+            
+            // Очищаем контейнер шагов
+            stepsContainer.innerHTML = '';
+            
+            // Получаем шаги решения
+            if (formulaData.calculator.steps) {
+                const steps = formulaData.calculator.steps(inputs);
+                
+                steps.forEach((step, index) => {
+                    const stepElement = document.createElement('div');
+                    stepElement.className = 'step';
+                    stepElement.innerHTML = `<strong>Шаг ${index + 1}:</strong> ${step}`;
+                    stepsContainer.appendChild(stepElement);
+                });
+                
+                stepByStep.style.display = 'block';
+            } else {
+                stepsContainer.innerHTML = '<div class="step">Пошаговое решение недоступно для этой формулы</div>';
+                stepByStep.style.display = 'block';
+            }
+        }
+        
+        // Функция показа подсказок поиска
+        function showSearchSuggestions(query) {
+            const suggestionsContainer = document.querySelector('.search-suggestions');
+            suggestionsContainer.innerHTML = '';
+            
+            const lowerQuery = query.toLowerCase();
+            let suggestions = [];
+            
+            // Ищем совпадения в названиях тем и формул
+            for (const subject in formulasData) {
+                for (const classNum in formulasData[subject]) {
+                    for (const topic in formulasData[subject][classNum]) {
+                        const topicData = formulasData[subject][classNum][topic];
+                        
+                        // Проверяем совпадение в названии темы
+                        if (topicData.title.toLowerCase().includes(lowerQuery)) {
+                            suggestions.push({
+                                type: 'topic',
+                                subject: subject,
+                                class: classNum,
+                                topic: topic,
+                                name: topicData.title,
+                                display: `Тема: ${topicData.title}`
+                            });
+                        }
+                        
+                        // Проверяем совпадение в названиях формул
+                        if (topicData.formulas) {
+                            topicData.formulas.forEach(formula => {
+                                if (formula.name.toLowerCase().includes(lowerQuery) || 
+                                    formula.formula.toLowerCase().includes(lowerQuery)) {
+                                    suggestions.push({
+                                        type: 'formula',
+                                        subject: subject,
+                                        class: classNum,
+                                        topic: topic,
+                                        name: formula.name,
+                                        display: `Формула: ${formula.name} (${topicData.title})`
+                                    });
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            
+            // Ограничиваем количество подсказок
+            suggestions = suggestions.slice(0, 10);
+            
+            // Создаем элементы подсказок
+            suggestions.forEach(suggestion => {
+                const suggestionElement = document.createElement('div');
+                suggestionElement.className = 'suggestion-item';
+                suggestionElement.textContent = suggestion.display;
+                suggestionElement.addEventListener('click', () => {
+                    document.querySelector('.search-box').value = '';
+                    document.querySelector('.search-suggestions').style.display = 'none';
+                    
+                    if (suggestion.type === 'topic') {
+                        displayFormulas(suggestion.subject, suggestion.class, suggestion.topic);
+                        updateRecommendations(suggestion.subject, suggestion.class, suggestion.topic);
+                    } else {
+                        displayFormulas(suggestion.subject, suggestion.class, suggestion.topic);
+                        // Находим индекс формулы и нажимаем кнопку "Использовать формулу"
+                        setTimeout(() => {
+                            const formulaItems = document.querySelectorAll('.formula-item');
+                            formulaItems.forEach((item, index) => {
+                                if (item.querySelector('h3').textContent === suggestion.name) {
+                                    item.querySelector('.use-formula-btn').click();
+                                }
+                            });
+                        }, 100);
+                    }
+                });
+                
+                suggestionsContainer.appendChild(suggestionElement);
+            });
+            
+            if (suggestions.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.className = 'suggestion-item';
+                noResults.textContent = 'Ничего не найдено';
+                suggestionsContainer.appendChild(noResults);
+            }
+        }
+        
+        // Функция применения фильтров
+        function applyFilters() {
+            const subjectFilter = document.getElementById('subject-filter').value;
+            const classFilter = document.getElementById('class-filter').value;
+            
+            document.querySelectorAll('.topic-item').forEach(item => {
+                const subject = item.dataset.subject;
+                const classNum = item.dataset.class;
+                
+                const subjectMatch = subjectFilter === 'all' || subject === subjectFilter;
+                const classMatch = classFilter === 'all' || classNum === classFilter;
+                
+                if (subjectMatch && classMatch) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        // Функция обновления рекомендаций
+        function updateRecommendations(subject, classNum, topic) {
+            const recommendationsList = document.querySelector('.recommendations-list');
+            recommendationsList.innerHTML = '';
+            
+            // Создаем рекомендации на основе выбранной темы
+            const recommendations = [];
+            
+            // Рекомендуем другие темы из того же класса и предмета
+            if (formulasData[subject] && formulasData[subject][classNum]) {
+                for (const otherTopic in formulasData[subject][classNum]) {
+                    if (otherTopic !== topic) {
+                        recommendations.push({
+                            subject: subject,
+                            class: classNum,
+                            topic: otherTopic,
+                            name: formulasData[subject][classNum][otherTopic].title
+                        });
+                    }
+                }
+            }
+            
+            // Ограничиваем количество рекомендаций
+            const limitedRecommendations = recommendations.slice(0, 5);
+            
+            limitedRecommendations.forEach(rec => {
+                const recElement = document.createElement('div');
+                recElement.className = 'recommendation-item';
+                recElement.textContent = rec.name;
+                recElement.addEventListener('click', () => {
+                    displayFormulas(rec.subject, rec.class, rec.topic);
+                    updateRecommendations(rec.subject, rec.class, rec.topic);
+                });
+                
+                recommendationsList.appendChild(recElement);
+            });
+            
+            if (limitedRecommendations.length === 0) {
+                recommendationsList.innerHTML = '<div class="recommendation-item">Рекомендации появятся здесь после выбора темы</div>';
+            }
+        }
+    </script>
+</body>
+</html>
